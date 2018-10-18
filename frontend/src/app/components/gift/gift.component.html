@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="alert" *ngIf="errorMsg">
+  {{errorMsg}}
+</div>
+
+<form #giftForm="ngForm" novalidate>
+  <mat-form-field>
+    <input matInput  [(ngModel)]="giftData.giftname" name="giftname"   placeholder="giftname" required>
+  </mat-form-field>
+  <span class="spacer"></span>
+  <mat-form-field >
+    <textarea matInput [(ngModel)]="giftData.description" name="description"  placeholder="description"></textarea>
+  </mat-form-field>
+
+  <button [disabled]="giftForm.form.invalid" type="submit" mat-button (click)="toServer();">add</button>
+</form>
+
+
+<div *ngFor="let g of gift">
+  <mat-card class="card">
+    <mat-card-header>
+      {{g.giftname}}
+    </mat-card-header>
+    <mat-card-actions>
+    <button mat-button (click)="deleteGift(g._id)">delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<app-sendmail></app-sendmail>
+
+
+

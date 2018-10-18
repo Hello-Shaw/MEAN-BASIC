@@ -1,0 +1,19 @@
+.login {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  height:50px;
+}
+
+.spacer {
+  width: 20px;
+}
+
+.active {
+  color: #039be5;
+}
+.warn{
+  color:red;
+}

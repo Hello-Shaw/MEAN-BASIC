@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<div class="alert" *ngIf="errorMsg">
+  {{errorMsg}}
+  {{message}}
+</div>
+
+<form class="form" #userForm="ngForm"  *ngIf="!submitted" (ngSubmit)="onSubmit(userForm)" novalidate>
+  <table class="width" cellspacing="0"><tr>
+    <td><mat-form-field class="width">
+      <input matInput placeholder="First name"
+             #firstname="ngModel"
+             required
+             [class.is-invalid]="firstname.invalid && firstname.touched"
+             name="firstname" [(ngModel)]="userModel.firstname">
+    </mat-form-field>
+    </td>
+    <td><mat-form-field class="width">
+      <input matInput placeholder="Last Name"
+             #lastname="ngModel"
+             required
+             [class.is-invalid]="lastname.invalid && lastname.touched"
+             name="lastname" [(ngModel)]="userModel.lastname" ngModel>
+    </mat-form-field></td>
+  </tr></table>
+  <mat-form-field class="width">
+    <input matInput placeholder="Email" name="username" [(ngModel)]="userModel.email" ngModel
+           required
+           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+    >
+
+    <mat-error  *ngIf="emailFormControl.hasError('email') && emailFormControl.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error  *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field class="width">
+    <input matInput required placeholder="password" type="password" name="password" [(ngModel)]="userModel.password">
+  </mat-form-field>
+   <button [disabled]="userForm.form.invalid" type="submit" mat-button class="button">submit</button>
+</form>

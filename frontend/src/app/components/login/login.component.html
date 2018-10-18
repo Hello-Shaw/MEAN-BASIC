@@ -1,0 +1,36 @@
+<form #forLogin="ngForm" (ngSubmit)="toLogin(forLogin)">
+<div class="login">
+  <mat-form-field>
+    <input matInput placeholder="username"
+           #username="ngModel"
+           name="username" [(ngModel)]="loginModel.username"
+    >
+  </mat-form-field>
+  <span class="spacer"></span>
+  <mat-form-field>
+    <input matInput placeholder="password" [type]="hide ? 'password' : 'text'"
+           #password="ngModel"
+           name="password" [(ngModel)]="loginModel.password"
+    >
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+  </mat-form-field>
+  <span class="spacer"></span>
+  <button
+    *ngIf="!_userService.loggedIn()"
+    mat-button class="button" type="submit">login</button>
+  <span class="spacer"></span>
+  <button
+    *ngIf="!_userService.loggedIn()"
+    mat-button  routerLink="/register" routerLinkActive="active" class="button">register</button>
+  <button
+    *ngIf="!!_userService.loggedIn()"
+    (click)="!!_userService.logoutUser()"
+    mat-button class="button">
+    <!--*ngIf="_userService.logoutUser()"-->
+    log out</button>
+  <div class="warn">{{errorMsg}}</div>
+</div>
+
+</form>
+
+
